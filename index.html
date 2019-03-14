@@ -5,30 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+   
 </head>
 <body>
+
+    $.AJAX 
+    <!-- Using API : http://api-pacientes.herokuapp.com/pacientes and create a XMLHttpRequest object to acess 
+    datas and put into HTML Field you can output one by one or everyone -->
+
+    <p class="contentField"></p>
+    <div id="result"></div>
+
+    <button id="btnOneByOne">Output json OneByOne</button>
     
-
-    <!-- Using API : http://api-pacientes.herokuapp.com/pacientes 
-    and create a XMLHttpRequest object to acess datas and put into console -->
-    <script>
-
+    <button id="btnEveryOne">Output json everyone </button>
+    
+    <script type="text/javascript">
         
         var xhr =  new XMLHttpRequest();
 
         xhr.open("GET","http://api-pacientes.herokuapp.com/pacientes");
-        
+
         xhr.addEventListener("load",function(){
-            console.log(xhr.responseText);
+
+            var getAPIData =  xhr.responseText;
+            var setAPIObjects = JSON.parse(getAPIData); 
+            var getAPIObjectsLenght = Object.keys(setAPIObjects).length;
+            var counter = 0;
+
+
+            $("#btnOneByOne").click(function(){
+                
+                $(".contentField").append("<p>First JSON name : "+ setAPIObjects[counter++].nome+"</p>");
+                
+            });
+
+            $("#btnEveryOne").click(function(){
+
+                for(counter = 0 ; counter < getAPIObjectsLenght ; counter++){
+                    $(".contentField").append("<p>"+setAPIObjects[counter].nome+"</p>");
+                    $(".contentField").append("<p>"+setAPIObjects[counter].peso+"</p>");
+                    $(".contentField").append("<p>"+setAPIObjects[counter].altura+"</p>");
+                    $(".contentField").append("<p>"+setAPIObjects[counter].gordura+"</p>");
+                    $(".contentField").append("<p>"+setAPIObjects[counter].imc+"</p><hr>");
+                    
+                }
+            });
+        
         });
-        
+
         xhr.send();
-
         
-        
-    </script>
-
-
+    </script> 
 
 </body>
 </html>
