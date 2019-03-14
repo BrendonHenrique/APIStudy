@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <!-- Using API : http://api-pacientes.herokuapp.com/pacientes 
+    and create a XMLHttpRequest object to acess datas and put into console -->
+    <script>
+
+        
+        var xhr =  new XMLHttpRequest();
+
+        xhr.open("GET","http://api-pacientes.herokuapp.com/pacientes");
+        
+        xhr.addEventListener("load",function(){
+            console.log(xhr.responseText);
+        });
+        
+        xhr.send();
+
+        
+        
+    </script>
+
+
+
+</body>
+</html>
